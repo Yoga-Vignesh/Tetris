@@ -1,6 +1,3 @@
-# Tetris
- A fun-filled and simple Tetris 
-
 # Tetris Game
 
 This is a simple implementation of the classic **Tetris Game** using HTML, CSS, and JavaScript.
@@ -25,13 +22,13 @@ This is a simple implementation of the classic **Tetris Game** using HTML, CSS, 
 1. Clone this repository to your local machine:
 
    \`\`\`bash
-   git clone https://github.com/Yoga-Vignesh/Tetris-Game.git
+   git clone https://github.com/Yoga-Vignesh/Tetris.git
    \`\`\`
 
 2. Navigate to the project directory:
 
    \`\`\`bash
-   cd Tetris-Game
+   cd Tetris
    \`\`\`
 
 3. Open the \`index.html\` file in your browser to start playing the game.
