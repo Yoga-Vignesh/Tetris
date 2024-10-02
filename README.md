@@ -53,7 +53,7 @@ Tetris-Game/
 ## Screenshots
 
 ### Game UI:
-![Tetris Game](./screenshots/tetris_game.png)
+![Tetris Game]
 
 ## Future Enhancements
 
