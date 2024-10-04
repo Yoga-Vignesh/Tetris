@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const scoreDisplay = document.querySelector('#score');
   const width = 10;
   let squares = [];
+  let isPaused = false;
 
   // Create the grid dynamically
   for (let i = 0; i < 200; i++) {
@@ -122,22 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
     );
     draw();
   }
-
-  // Assign functions to keycodes
-  function control(e) {
-    if (e.keyCode === 37) {
-      moveLeft();
-    } else if (e.keyCode === 38) {
-      rotate();
-    } else if (e.keyCode === 39) {
-      moveRight();
-    } else if (e.keyCode === 40) {
-      moveDown();
-    }
-  }
-  document.addEventListener('keyup', control);
-
-  // Add score
+  
+// Add score
   function addScore() {
     for (let i = 0; i < 199; i += width) {
       const row = [
@@ -177,4 +164,35 @@ document.addEventListener('DOMContentLoaded', () => {
       clearInterval(timerId);
     }
   }
+
+  // Pause and Resume functionality
+  function togglePause() {
+    if (isPaused) {
+      timerId = setInterval(moveDown, 1000);
+      isPaused = false;
+    } else {
+      clearInterval(timerId);
+      isPaused = true;
+    }
+  }
+
+  // Assign functions to keycodes
+  function control(e) {
+    if (e.keyCode === 32) { // Spacebar to toggle pause
+      togglePause();
+    }
+    if (!isPaused) { // Only allow movement when not paused
+      if (e.keyCode === 37) {
+        moveLeft();
+      } else if (e.keyCode === 38) {
+        rotate();
+      } else if (e.keyCode === 39) {
+        moveRight();
+      } else if (e.keyCode === 40) {
+        moveDown();
+      }
+    }
+  }
+
+  document.addEventListener('keyup', control);
 });
