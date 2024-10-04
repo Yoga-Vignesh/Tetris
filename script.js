@@ -113,15 +113,27 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
   }
 
-  // Rotate the tetromino
   function rotate() {
     undraw();
-    currentRotation = (currentRotation + 1) % tetrominoes.length;
-    current = tetrominoes[random].map(
-      (index) => (index + currentRotation) % tetrominoes[random].length
+    const nextRotation = (currentRotation + 1) % tetrominoes[random].length;
+    const next = tetrominoes[random][nextRotation];
+
+    // Check if rotation is valid
+    const isValidRotation = next.every(index =>
+      (currentPosition + index) % width >= 0 && // within left boundary
+      (currentPosition + index) % width < width && // within right boundary
+      (currentPosition + index) < 200 && // within grid height
+      !squares[currentPosition + index].classList.contains('taken') // not overlapping taken squares
     );
+
+    if (isValidRotation) {
+      currentRotation = nextRotation;
+      current = next;
+    }
+
     draw();
   }
+
 
   // Assign functions to keycodes
   function control(e) {
