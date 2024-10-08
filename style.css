@@ -59,3 +59,8 @@ footer img {
   vertical-align: middle;
   margin-left: 5px;
 }
+
+/* New paused state */
+.paused {
+  background-color: #f0e68c; /* Light yellow background to indicate pause */
+}
