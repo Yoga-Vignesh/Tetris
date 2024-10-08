@@ -21,42 +21,15 @@ This is a simple implementation of the classic **Tetris Game** using HTML, CSS, 
 
 1. Clone this repository to your local machine:
 
-   \`\`\`bash
+   
    git clone https://github.com/Yoga-Vignesh/Tetris.git
-   \`\`\`
+   
 
 2. Navigate to the project directory:
 
-   \`\`\`bash
+   
    cd Tetris
-   \`\`\`
-
-3. Open the \`index.html\` file in your browser to start playing the game.
-
-   \`\`\`bash
-   open index.html
-   \`\`\`
-
-## Project Structure
-
-\`\`\`
-Tetris-Game/
-├── index.html    # Main HTML file
-├── style.css     # CSS for styling the game
-├── script.js     # JavaScript logic for Tetris
-└── README.md     # Project documentation
-\`\`\`
-
-## Screenshots
-
-### Game UI:
-![Tetris Game]
-
-## Future Enhancements
-
-- Implement different difficulty levels.
-- Add sound effects when rows are cleared.
-- Add pause and restart buttons.
+   
 
 ## License
 
