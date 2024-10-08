@@ -81,59 +81,64 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Move the tetromino left
-  function moveLeft() {
-    undraw();
-    const isAtLeftEdge = current.some(
-      (index) => (currentPosition + index) % width === 0
-    );
-    if (!isAtLeftEdge) currentPosition -= 1;
-    if (
-      current.some((index) =>
-        squares[currentPosition + index].classList.contains('taken')
-      )
-    ) {
-      currentPosition += 1;
-    }
-    draw();
+function moveLeft() {
+  undraw();
+  const isAtLeftEdge = current.some(
+    (index) => (currentPosition + index) % width === 0
+  );
+  
+  // Check if there's any taken square when moving left
+  if (!isAtLeftEdge) currentPosition -= 1;
+  if (
+    current.some((index) =>
+      squares[currentPosition + index].classList.contains('taken')
+    )
+  ) {
+    currentPosition += 1;  // Undo move if space is occupied
+  }
+  draw();
+}
+
+// Move the tetromino right
+function moveRight() {
+  undraw();
+  const isAtRightEdge = current.some(
+    (index) => (currentPosition + index) % width === width - 1
+  );
+  
+  // Check if there's any taken square when moving right
+  if (!isAtRightEdge) currentPosition += 1;
+  if (
+    current.some((index) =>
+      squares[currentPosition + index].classList.contains('taken')
+    )
+  ) {
+    currentPosition -= 1;  // Undo move if space is occupied
+  }
+  draw(); // Ensure tetromino is drawn after the move
+}
+
+// Rotate the tetromino
+function rotate() {
+  undraw();
+  const nextRotation = (currentRotation + 1) % tetrominoes[random].length;
+  const next = tetrominoes[random][nextRotation];
+
+  // Check if rotation is valid
+  const isValidRotation = next.every(index =>
+    (currentPosition + index) % width >= 0 && // within left boundary
+    (currentPosition + index) % width < width && // within right boundary
+    (currentPosition + index) < 200 && // within grid height
+    !squares[currentPosition + index].classList.contains('taken') // not overlapping taken squares
+  );
+
+  if (isValidRotation) {
+    currentRotation = nextRotation;
+    current = next;
   }
 
-  // Move the tetromino right
-  function moveRight() {
-    undraw();
-    const isAtRightEdge = current.some(
-      (index) => (currentPosition + index) % width === width - 1
-    );
-    if (!isAtRightEdge) currentPosition += 1;
-    if (
-      current.some((index) =>
-        squares[currentPosition + index].classList.contains('taken')
-      )
-    ) {
-      currentPosition -= 1;
-    }
-    draw();
-  }
-
-  function rotate() {
-    undraw();
-    const nextRotation = (currentRotation + 1) % tetrominoes[random].length;
-    const next = tetrominoes[random][nextRotation];
-
-    // Check if rotation is valid
-    const isValidRotation = next.every(index =>
-      (currentPosition + index) % width >= 0 && // within left boundary
-      (currentPosition + index) % width < width && // within right boundary
-      (currentPosition + index) < 200 && // within grid height
-      !squares[currentPosition + index].classList.contains('taken') // not overlapping taken squares
-    );
-
-    if (isValidRotation) {
-      currentRotation = nextRotation;
-      current = next;
-    }
-
-    draw();
-  }
+  draw(); // Redraw the tetromino after rotation
+}
 
   // Add score
   function addScore() {
